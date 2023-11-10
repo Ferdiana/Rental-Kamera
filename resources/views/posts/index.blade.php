@@ -21,14 +21,14 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
+                        <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH DATA</a>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">GAMBAR</th>
                                     <th scope="col">JUDUL</th>
-                                    <th scope="col">CONTENT</th>
-                                    <th scope="col">AKSI</th>
+                                    <th scope="col">DESKRIPSI</th>
+                                    <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>

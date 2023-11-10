@@ -12,15 +12,25 @@ use Illuminate\View\View;
 
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Auth; 
+
 class PostController extends Controller
 {
+    // public function index(): View
+    // {
+    //     //get posts
+    //     $posts = Post::latest()->paginate(5);
+
+    //     //render view with posts
+    //     return view('posts.index', compact('posts'));
+    // }
+
     public function index(): View
     {
-        //get posts
-        $posts = Post::latest()->paginate(5);
+    // Hanya ambil posts yang dibuat oleh pengguna yang sedang login
+    $posts = Post::where('user_id', Auth::id())->latest()->paginate(5);
 
-        //render view with posts
-        return view('posts.index', compact('posts'));
+    return view('posts.index', compact('posts'));
     }
 
     public function create(): View
@@ -43,6 +53,7 @@ class PostController extends Controller
 
         //create post
         Post::create([
+            'user_id'   => Auth::id(), // Tambahkan baris ini
             'image'     => $image->hashName(),
             'title'     => $request->title,
             'content'   => $request->content
@@ -80,8 +91,8 @@ class PostController extends Controller
             'content'   => 'required|min:10'
         ]);
 
-        //get post by ID
-        $post = Post::findOrFail($id);
+        // Pastikan post yang akan diperbarui milik pengguna yang sedang login
+        $post = Post::where('user_id', Auth::id())->findOrFail($id);
 
         //check if image is uploaded
         if ($request->hasFile('image')) {
@@ -115,8 +126,8 @@ class PostController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        //get post by ID
-        $post = Post::findOrFail($id);
+        // Pastikan post yang akan dihapus milik pengguna yang sedang login
+        $post = Post::where('user_id', Auth::id())->findOrFail($id);
 
         //delete image
         Storage::delete('public/posts/'. $post->image);

@@ -8,9 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    // public function index()
+    // {
+    // $posts = Post::where('user_id', Auth::id())->latest()->get();
+    // return view('home', compact('posts'));
+    // }
+
     public function index()
     {
-    $posts = Post::where('user_id', Auth::id())->latest()->get();
+    $posts = Post::latest()->get();
     return view('home', compact('posts'));
     }
 

@@ -9,7 +9,7 @@ class LandingPageController extends Controller
 {
     public function index()
     {
-    $posts = Post::all();
+    $posts = Post::latest()->take(3)->get();
     return view('index', compact('posts'));
     }
 

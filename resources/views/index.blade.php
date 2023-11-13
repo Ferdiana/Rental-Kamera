@@ -38,19 +38,9 @@
     </nav>
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-4 d-flex align-items-center justify-content-center">
-          <figure class="text-center">
-            <blockquote class="blockquote center">
-              <p>A well-known quote, contained in a blockquote element.</p>
-            </blockquote>
-            <figcaption class="blockquote-footer">
-              Someone famous in <cite title="Source Title">Source Title</cite>
-            </figcaption>
-          </figure>
-        </div>
+      <div class="row d-flex justify-content-around">
     
-        <div class="col-md-8">
+        <div class="col-md-6">
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
               @foreach ($posts as $post)
@@ -73,6 +63,15 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+        </div>
+
+        <div class="col-md-4 d-flex flex-column justify-content-center">
+          <div class="h1 mb-4">Feature Section</div>
+          <div class="p mb-4">You can also add spacing between the heading and paragraph, swap a video in for the image, or add a button. Just make sure to drop your button into the div block that contains this content.</div>
+          <div class="div">
+            <button class="btn-primary p-2">Book Now</button>
+          </div>
+          
         </div>
       </div>
     </div>

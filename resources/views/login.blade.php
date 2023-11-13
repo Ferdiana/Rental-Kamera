@@ -11,23 +11,25 @@
 </head>
 
 <body>
-    <div class="row justify-content-between mt-5">
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <h1 class="card-title">Login</h1>
-                </div>
-                <div class="card-body">
-                    @if (Session::has('error'))
+    <div class="container-fluid">
+
+        <div class="row justify-content-between mt-5">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">Login</h1>
+                    </div>
+                    <div class="card-body">
+                        @if (Session::has('error'))
                         <div class="alert alert-danger" role="alert">
                             {{Session::get('error')}}
                         </div>   
-                    @endif
-                    <form action="{{ route('login') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">  
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="email"
+                        @endif
+                        <form action="{{ route('login') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">  
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" name="email" class="form-control" id="email"
                                 placeholder="name@example.com" required>
                         </div>
                         <div class="mb-3">
@@ -44,9 +46,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        
+        <div class="col-md-4">
             aa
         </div>
+        
     </div>
 </body>
 

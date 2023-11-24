@@ -7,23 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  
-    <style>
-      .card-img-top {
-        height: 500px;
-        object-fit: cover;
-      }
-      .list-group-item {
-      border: none !important; /* Menghapus border */
-      background-color: transparent !important;
-      }
-      .list-group-item.active {
-      color: #0008ff !important; /* Mengubah warna teks saat aktif menjadi merah */
-      }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
       
-      </style>
-      
-    <title> Home </title>
+    <title>Hello, world!</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 mb-5">
@@ -38,7 +24,7 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/posts">Product</a>
+              <a class="nav-link active" aria-current="page" href="/product">Product</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Contact Us</a>
@@ -56,52 +42,42 @@
       </div>
     </nav>
 
-    <div class="container-fluid"> 
-      <div class="row">
-          <div class="col-md-4">
-            <div class="col"> 
-              <div class="header" style="padding-left: 1rem"><h4>Categori</h4></div>
-              <div class="body">
-                <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                    The current link item
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                </div>
-              </div>
+    <div class="container-fluid">
+      <div class="row d-flex justify-content-around">
+    
+        <div class="col-md-6">
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              @foreach ($products as $product)
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}" aria-current="true" aria-label="Slide {{ $loop->index + 1 }}"></button>
+              @endforeach
             </div>
+            <div class="carousel-inner">
+              @foreach ($products as $product)
+              <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                <img src="{{ Storage::url('public/products/'.$product->image) }}" class="d-block w-100" alt="{{ $product->name }}" style="height: 500px; object-fit: cover;">
+              </div>
+              @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-4 d-flex flex-column justify-content-center">
+          <div class="h1 mb-4">Feature Section</div>
+          <div class="p mb-4">You can also add spacing between the heading and paragraph, swap a video in for the image, or add a button. Just make sure to drop your button into the div block that contains this content.</div>
+          <div class="div">
+            <button class="btn-primary p-2">Book Now</button>
+          </div>
           
-            <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 1030; width: 20%;">
-              <div class="card">
-                <div class="button-add">
-                  <a href="/posts" class="btn btn-light">Add Item</a>
-                </div>
-                <div class="button-add">
-                  <a href="#" class="btn btn-light">Show Item</a>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-        <div class="col">
-          <div class="row">
-            @foreach ($posts as $post)
-              <div class="col-md-6">
-                <div class="card mb-4">
-                  <img src="{{ Storage::url('public/posts/'.$post->image) }}" class="card-img-top" alt="{{ $post->title }}">
-                  <a href="{{ route('posts.show', $post->id) }}"
-                    class="btn btn-sm btn-dark">SHOW</a>
-                  <div class="card-body">
-                    <h5 class="card-title">{{ $post->title }}</h5>
-                    <p class="card-text">{!! $post->content !!}</p>
-                  </div>
-                </div>
-              </div>
-            @endforeach
-          </div>
-        </div>      
+        </div>
       </div>
     </div>
   </body>

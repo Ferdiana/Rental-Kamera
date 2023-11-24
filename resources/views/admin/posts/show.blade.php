@@ -16,11 +16,11 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <img src="{{ asset('storage/posts/' . $post->image) }}" class="w-100 rounded">
+                        <img src="{{ asset('/storage/products/' . $product->image) }}" class="w-100 rounded">
                         <hr>
-                        <h4>{{ $post->title }}</h4>
+                        <h4>{{ $product->nama }}</h4>
                         <p class="tmt-3">
-                            {!! $post->content !!}
+                            {!! $product->deskripsi !!}
                         </p>
                     </div>
                 </div>

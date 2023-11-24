@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +14,10 @@ class HomeController extends Controller
     // return view('home', compact('posts'));
     // }
 
-    public function index()
+    public function home()
     {
-    $posts = Post::latest()->get();
-    return view('home', compact('posts'));
+    $products = Product::latest()->get();
+    return view('home', compact('products'));
     }
 
 }

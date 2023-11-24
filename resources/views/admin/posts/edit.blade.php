@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="{{ route('posts.update', $post->id) }}" method="POST"
+                        <form action="{{ route('admin.posts.update', $product->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -27,12 +27,12 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">JUDUL</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                    name="title" value="{{ old('title', $post->title) }}"
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                    name="nama" value="{{ old('nama', $product->nama) }}"
                                     placeholder="Masukkan Judul Post">
 
                                 <!-- error message untuk title -->
-                                @error('title')
+                                @error('nama')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -41,15 +41,34 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">KONTEN</label>
-                                <textarea class="form-control @error('content') is-invalid @enderror" name="content" rows="5"
-                                    placeholder="Masukkan Konten Post">{{ old('content', $post->content) }}</textarea>
+                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5"
+                                    placeholder="Masukkan Konten Post">{{ strip_tags(old('deskripsi', $product->deskripsi)) }}</textarea>
 
-                                <!-- error message untuk content -->
-                                @error('content')
+                                <!-- error message untuk deskripsi -->
+                                @error('deskripsi')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">HARGA</label>
+                                <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{ old('nama', $product->harga) }}" placeholder="Masukkan Harga Produk">
+                                @error('harga')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">KATEGORI</label>
+                                <select class="form-control" name="kategori_id">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-md btn-primary">UPDATE</button>

@@ -21,31 +21,39 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH DATA</a>
+                        <a href="{{ route('adminLogout') }}" class="btn btn-danger mb-3">Logout</a>
+                        
+                        <a href="{{ route('admin.posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH DATA</a>
+
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">GAMBAR</th>
                                     <th scope="col">JUDUL</th>
                                     <th scope="col">DESKRIPSI</th>
+                                    <th scope="col">HARGA</th>
+                                    <th scope="col">KATEGORI</th>
                                     <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($posts as $post)
+                                @forelse ($products as $product)
                                     <tr>
                                         <td class="text-center">
-                                            <img src="{{ asset('/storage/posts/' . $post->image) }}" class="rounded"
+                                            <img src="{{ asset('/storage/products/' . $product->image) }}" class="rounded"
                                                 style="width: 150px">
                                         </td>
-                                        <td>{{ $post->title }}</td>
-                                        <td>{!! $post->content !!}</td>
+                                        <td>{{ $product->nama }}</td>
+                                        <td>{!! $product->deskripsi !!}</td>
+                                        <td>{{ $product->harga }}</td>
+                                        <td>{{ $product->category->nama_kategori }}</td>
+                                        
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                                <a href="{{ route('posts.show', $post->id) }}"
+                                                action="{{ route('admin.posts.destroy', $product->id) }}" method="POST">
+                                                <a href="{{ route('admin.posts.show', $product->id) }}"
                                                     class="btn btn-sm btn-dark">SHOW</a>
-                                                <a href="{{ route('posts.edit', $post->id) }}"
+                                                <a href="{{ route('admin.posts.edit', $product->id) }}"
                                                     class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
@@ -60,7 +68,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $posts->links() }}
+                        {{ $products->links() }}
                     </div>
                 </div>
             </div>

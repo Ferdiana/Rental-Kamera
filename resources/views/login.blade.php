@@ -37,6 +37,10 @@
                             <input type="password" name="password" class="form-control" id="password"
                             placeholder="Password" required>
                         </div>
+                        <div class="mb-3" onclick="redirectToNewPage()">
+                            Don't Have Account?
+                            <a href="#" class="text-decoration-none">Register Here</a>
+                        </div>
                         <div class="mb-3">
                             <div class="div">
                                 <button class="btn-primary">Login</button>
@@ -47,12 +51,16 @@
             </div>
         </div>
     
-        <div class="col-md-6 border">
-            aa
+        <div class="col-md-6 border">  
+            <img src="storage\assets\tes.png" alt="Your Image Alt Text"  style="width: 100%; height: 100%; object-fit: cover;">
         </div>
-    
-        
     </div>
+
+    <script>
+        function redirectToNewPage() {
+            window.location.href = "/register";
+        }
+    </script>
 </body>
 
 </html>

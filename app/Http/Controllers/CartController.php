@@ -30,7 +30,7 @@ class CartController extends Controller
             'quantity'   => $request->quantity,
         ]);
 
-        return redirect()->route('cart.index')->with('success', 'Product added to cart.');
+        return redirect()->route('product')->with('success', 'Product added to cart.');
     }
     
 

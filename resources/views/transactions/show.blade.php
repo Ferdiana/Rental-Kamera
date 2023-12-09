@@ -14,6 +14,21 @@
     <p>Start Date: {{ $transaction->start_date }}</p>
     <p>End Date: {{ $transaction->end_date }}</p>
     <img src="{{ Storage::url($transaction->image_path) }}" alt="Transaction Image">
+    
+
+    <h2>Associated Cart Items</h2>
+    
+        <ul>
+            @foreach($transactionItems as $transactionItem)
+                <li>
+                    Product Name: {{ $transactionItem->product->nama }}<br>
+                    Quantity: {{ $transactionItem->quantity }}<br>
+                    Price: {{ $transactionItem->price }}<br>
+                    
+                </li>
+            @endforeach
+        </ul>
+        Price: {{ $transactionItem->transaction->invoice_number }}<br>
 
     <a href="{{ route('transactions.download', $transaction) }}" class="btn btn-primary">Download Details</a>
     <a href="{{ route('transactions.index') }}">Back to Transactions</a>

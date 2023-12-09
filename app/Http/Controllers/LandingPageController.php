@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
 {
     public function index()
     {
-    $posts = Post::latest()->take(3)->get();
-    return view('index', compact('posts'));
+    $products = Product::latest()->take(3)->get();
+    return view('index', compact('products'));
     }
 
 }

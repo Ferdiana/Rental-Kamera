@@ -9,12 +9,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
       
-    <title>Hello, world!</title>
+    <title>Home</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 mb-5">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Rental Kamera</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -71,14 +71,19 @@
         </div>
 
         <div class="col-md-4 d-flex flex-column justify-content-center">
-          <div class="h1 mb-4">Feature Section</div>
-          <div class="p mb-4">You can also add spacing between the heading and paragraph, swap a video in for the image, or add a button. Just make sure to drop your button into the div block that contains this content.</div>
+          <div class="h1 mb-4">Kamera</div>
+          <div class="p mb-4">kamera yang dapat anda sewa untuk mengabadikan momen-momen berharga anda. Kamera membawa keindahan fotografi ke ujung jari anda dengan teknologi canggih dan performa luar biasa.</div>
           <div class="div">
-            <button class="btn-primary p-2">Book Now</button>
+            <button class="btn-primary p-2" onclick="redirectToProduct()">Book Now</button>
           </div>
-          
         </div>
       </div>
     </div>
+
+    <script>
+      function redirectToProduct() {
+          window.location.href = "/product";
+      }
+    </script>
   </body>
 </html>

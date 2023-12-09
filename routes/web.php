@@ -34,6 +34,8 @@ Route::group(['middleware' => "guest"], function() {
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', [HomeController::class, 'home']);
     Route::get('/product', [ProductController::class, 'product']);
+    Route::get('/product/category/{category}', 'ProductController@showByCategory');
+    Route::get('/product', [ProductController::class, 'product'])->name('product');
     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::put('/cart/update/{item}', [CartController::class, 'update'])->name('cart.update');

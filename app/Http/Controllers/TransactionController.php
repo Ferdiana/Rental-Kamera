@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItem;
+use App\Models\TransactionItem;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -20,7 +22,16 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction)
     {
-        return view('transactions.show', compact('transaction'));
+        // Retrieve cartItems associated with the transaction
+        $transactionItems = $transaction->transactionItems;
+
+    // Access product details for each transaction item
+        foreach ($transactionItems as $transactionItem) {
+        $productName = $transactionItem->product->nama;
+        // Add more details as neededx     
+        }   
+
+        return view('transactions.show', compact('transaction', 'transactionItems'));
     }
 
     public function index()
@@ -57,9 +68,20 @@ class TransactionController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'image_path' => $imagePath,
-        ]);
 
-        // Associate cart items with the transaction
+        ]);
+        
+        $cartItems = $user->cartItems;
+
+        foreach ($cartItems as $cartItem) {
+            $transactionItem = TransactionItem::create([
+                'transaction_id' => $transaction->id,
+                'product_id' => $cartItem->product_id,
+                'quantity' => $cartItem->quantity,
+                'price' => $cartItem->product->harga, // Adjust this based on your actual product pricing
+            ]);
+        }
+
         $user->cartItems->each(function ($cartItem) use ($transaction) {
             $cartItem->update(['transaction_id' => $transaction->id]);
         });
@@ -70,7 +92,6 @@ class TransactionController extends Controller
         return redirect()->route('cart.index')->with('success', 'Transaction completed successfully.');
     }
 
-    // You can customize the invoice number generation logic based on your requirements
     private function generateInvoiceNumber()
     {
         return 'INV-' . now()->format('YmdHis') . rand(1000, 9999);
@@ -78,17 +99,14 @@ class TransactionController extends Controller
 
     public function download(Transaction $transaction)
 {
-    // Get transaction details
     $details = [
         'name' => $transaction->name,
         'phone Number' => $transaction->phone_number,
         'start Date' => $transaction->start_date,
         'end Date' => $transaction->end_date,
         'image' => $transaction->image_path
-        // Add more details based on your transaction model
     ];
 
-    // Create a CSV file
     $csv = Writer::createFromString('');
     $csv->insertOne(array_keys($details));
     $csv->insertOne(array_values($details));

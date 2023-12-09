@@ -16,6 +16,7 @@ class Transaction extends Model
         'invoice_number',
         'start_date',
         'end_date',
+        'cart_items',
         'image_path',
         // Add any other necessary fields
     ];
@@ -28,5 +29,10 @@ class Transaction extends Model
     public function cartItems()
     {
         return $this->hasMany(CartItem::class);
+    }
+
+    public function transactionItems()
+    {
+        return $this->hasMany(TransactionItem::class);
     }
 }

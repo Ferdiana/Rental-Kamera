@@ -21,7 +21,6 @@
             <div class="col-md-8">
 
                 <h1>Transaction Form</h1>
-                <p>Name: {{ $cartItems }}</p>
                 
                 <form action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -48,7 +47,7 @@
                     </div>
         
                     <div class="form-group">
-                        <label for="image">Image:</label>
+                        <label for="image">Data diri (KTP/SIM):</label>
                         <input type="file" name="image" class="form-control-file" required>
                     </div>
                     

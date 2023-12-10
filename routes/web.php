@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/', function () {
             return view('welcome');
         })->name('adminDashboard');
+        Route::get('posts/transaction/show-all', [PostController::class, 'showAllTransactions'])->name('admin.posts.transaction.show-all');
         Route::get('posts', [\App\Http\Controllers\Admin\PostController::class, 'index'])->name('admin.posts.index');
         Route::get('posts/create', [\App\Http\Controllers\Admin\PostController::class, 'create'])->name('admin.posts.create');
         Route::post('posts/store', [\App\Http\Controllers\Admin\PostController::class, 'store'])->name('admin.posts.store');

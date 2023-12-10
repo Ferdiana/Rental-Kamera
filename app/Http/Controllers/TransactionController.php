@@ -56,7 +56,10 @@ class TransactionController extends Controller
         $user = Auth::user();
 
         // Store the image
-        $imagePath = $request->file('image')->store('public/transaction_images');
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName(); // Get the original image name
+        $imagePath = $image->storeAs('public/transaction_images', $imageName); // Store with the original name
+
 
         // Create the transaction
         $transaction = Transaction::create([
@@ -67,7 +70,7 @@ class TransactionController extends Controller
             'invoice_number' => $this->generateInvoiceNumber(),
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'image_path' => $imagePath,
+            'image_path' => $imageName,
 
         ]);
         

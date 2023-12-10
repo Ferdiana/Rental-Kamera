@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Tambah Data Product</h3>
+                    <h3 class="text-center my-4">Data Product</h3>
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
@@ -44,7 +44,7 @@
                                             <img src="{{ asset('/storage/products/' . $product->image) }}" class="rounded"
                                                 style="width: 150px">
                                         </td>
-                                        <td>{{ $product->nama }}</td>
+                                        <td>{{ $product->image }}</td>
                                         <td>{!! $product->deskripsi !!}</td>
                                         <td>{{ $product->harga }}</td>
                                         <td>{{ $product->category->nama_kategori }}</td>

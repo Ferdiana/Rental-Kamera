@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
+use App\Models\TransactionItem;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -124,5 +126,12 @@ class PostController extends Controller
 
         //redirect to index
         return redirect()->route('admin.posts.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+
+    public function showAllTransactions(): View
+    {
+        $transactions = Transaction::all();
+
+        return view('admin.posts.transaction', compact('transactions'));
     }
 }

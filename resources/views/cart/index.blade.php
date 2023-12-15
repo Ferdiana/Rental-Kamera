@@ -24,6 +24,12 @@
         {{ session('success') }}
     </div>
     @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger" id="success-alert">
+        {{ session('error') }}
+    </div>
+    @endif
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 mb-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Rental Kamera</a>

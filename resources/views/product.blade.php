@@ -41,6 +41,12 @@
     </div>
     @endif
 
+    @if(session('error'))
+    <div class="alert alert-danger" id="success-alert">
+        {{ session('error') }}
+    </div>
+    @endif
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 mb-5">
       <div class="container-fluid">
           <a class="navbar-brand" href="#">Rental Kamera</a>
@@ -113,11 +119,11 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">{{ $product->nama }}</h5>
                                     <p class="card-text">{!! $product->deskripsi !!}</p>
-                                    
             
                                     <form action="{{ route('cart.add', $product->id) }}" method="post" class="mt-auto">
                                         @csrf
                                         <div class="mb-3">
+                                            <p class="card-text">Stock: {{ $product->stock }}</p>
                                             <p class="card-text">Price/day: {!! $product->harga !!}</p>
                                             <label for="quantity" class="form-label">Quantity:</label>
                                             <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1">

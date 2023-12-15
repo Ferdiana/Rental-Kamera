@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">JUDUL</label>
+                                <label class="font-weight-bold">NAMA</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Judul Post">
 
                                 <!-- error message untuk title -->
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">KONTEN</label>
+                                <label class="font-weight-bold">DESKRIPSI</label>
                                 <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="5" placeholder="Masukkan Konten Post">{{ old('deskripsi') }}</textarea>
 
                                 <!-- error message untuk content -->
@@ -64,6 +64,16 @@
                                 <label class="font-weight-bold">HARGA</label>
                                 <input type="text" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{ old('harga') }}" placeholder="Masukkan Harga Produk">
                                 @error('harga')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="font-weight-bold">STOCK</label>
+                                <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{ old('stock', 0) }}" placeholder="Masukkan Jumlah Stock">
+                                @error('stock')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>

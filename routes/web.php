@@ -67,8 +67,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::put('posts/update/{id}', [\App\Http\Controllers\Admin\PostController::class, 'update'])->name('admin.posts.update');
         Route::get('posts/edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'edit'])->name('admin.posts.edit');
         Route::delete('posts/destroy/{id}', [\App\Http\Controllers\Admin\PostController::class, 'destroy'])->name('admin.posts.destroy');
+        Route::get('/posts/{id}/manage-stock', [PostController::class, 'manageStock'])->name('admin.posts.manage_stock');
+        Route::put('/posts/{id}/update-stock', [PostController::class, 'updateStock'])->name('admin.posts.update_stock');
     });
 });
-
-
-//Route::resource('/posts', \App\Http\Controllers\PostController::class);

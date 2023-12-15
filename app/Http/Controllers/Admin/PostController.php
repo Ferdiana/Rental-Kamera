@@ -52,7 +52,7 @@ class PostController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->route('admin.posts.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('adminDashboard')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
    
@@ -77,7 +77,8 @@ class PostController extends Controller
         $this->validate($request, [
             'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
             'nama'      => 'required|min:5',
-            'deskripsi' => 'required|min:10'
+            'deskripsi' => 'required|min:10',
+            'kategori_id' => 'required|exists:categories,id', // Add this line to validate category ID
         ]);
 
         // Pastikan post yang akan diperbarui milik pengguna yang sedang login
@@ -93,24 +94,26 @@ class PostController extends Controller
             //delete old image
             Storage::delete('public/products/'.$product->image);
 
-            //update post with new image
+            //update post with new image and category ID
             $product->update([
-                'image'     => $image->hashName(),
-                'nama'      => $request->nama,
-                'deskripsi' => $request->deskripsi
+                'image'       => $image->hashName(),
+                'nama'        => $request->nama,
+                'deskripsi'   => $request->deskripsi,
+                'kategori_id' => $request->kategori_id, // Add this line to update category ID
             ]);
 
         } else {
 
-            //update post without image
+            //update post without image and update category ID
             $product->update([
                 'nama'        => $request->nama,
-                'deskripsi'   => $request->deskripsi
+                'deskripsi'   => $request->deskripsi,
+                'kategori_id' => $request->kategori_id, // Add this line to update category ID
             ]);
         }
 
         //redirect to index
-        return redirect()->route('admin.posts.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('adminDashboard')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     public function destroy($id): RedirectResponse
@@ -125,7 +128,7 @@ class PostController extends Controller
         $product->delete();
 
         //redirect to index
-        return redirect()->route('admin.posts.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('adminDashboard')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
     public function showAllTransactions(): View
@@ -134,4 +137,25 @@ class PostController extends Controller
 
         return view('admin.posts.transaction', compact('transactions'));
     }
+
+    public function manageStock($id): View
+    {
+        $product = Product::findOrFail($id);
+
+        return view('admin.posts.manage_stock', compact('product'));
+    }
+
+    public function updateStock(Request $request, $id): RedirectResponse
+    {
+        $this->validate($request, [
+            'stock' => 'required|numeric',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->stock = $request->stock;
+        $product->save();
+
+        return redirect()->route('adminDashboard', $id)->with(['success' => 'Stock updated successfully']);
+    }
 }
+

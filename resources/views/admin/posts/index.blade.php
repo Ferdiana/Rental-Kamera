@@ -31,6 +31,7 @@
                                     <th scope="col">DESKRIPSI</th>
                                     <th scope="col">PRICE</th>
                                     <th scope="col">CATEGORY</th>
+                                    <th scope="col">STOCK</th> 
                                     <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
@@ -45,6 +46,7 @@
                                         <td>{!! $product->deskripsi !!}</td>
                                         <td>{{ $product->harga }}</td>
                                         <td>{{ $product->category->nama_kategori }}</td>
+                                        <td>{{ $product->stock }}</td>
                                         
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"
@@ -53,6 +55,8 @@
                                                     class="btn btn-sm btn-dark">SHOW</a>
                                                 <a href="{{ route('admin.posts.edit', $product->id) }}"
                                                     class="btn btn-sm btn-primary">EDIT</a>
+                                                <a href="{{ route('admin.posts.manage_stock', $product->id) }}" 
+                                                    class="btn btn-sm btn-warning">Manage Stock</a>    
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>

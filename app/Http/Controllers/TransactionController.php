@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Response;
 use League\Csv\Writer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class TransactionController extends Controller
 {
@@ -101,25 +102,25 @@ class TransactionController extends Controller
     }
 
     public function download(Transaction $transaction)
-{
-    $details = [
-        'name' => $transaction->name,
-        'phone Number' => $transaction->phone_number,
-        'start Date' => $transaction->start_date,
-        'end Date' => $transaction->end_date,
-        'image' => $transaction->image_path
-    ];
+    {
+        // Prepare data for PDF
+        $details = [
+            'name' => $transaction->name,
+            'phone Number' => $transaction->phone_number,
+            'start Date' => $transaction->start_date,
+            'end Date' => $transaction->end_date,
+            'image' => $transaction->image_path,
+        ];
 
-    $csv = Writer::createFromString('');
-    $csv->insertOne(array_keys($details));
-    $csv->insertOne(array_values($details));
+        // Create a PDF instance
+        $pdf = PDF::loadView('pdf.transaction', compact('details'));
 
-    // Save the CSV file to storage
-    $filePath = 'public/transaction_details/' . $transaction->id . '_details.csv';
-    Storage::put($filePath, $csv->getContent());
+        // Save the PDF file to storage
+        $filePath = 'public/transaction_details/' . $transaction->id . '_details.pdf';
+        Storage::put($filePath, $pdf->output());
 
-    // Provide the download link
-    return Response::download(storage_path('app/' . $filePath));
-}
+        // Provide the download link
+        return Response::download(storage_path('app/' . $filePath));
+    }
 }
 

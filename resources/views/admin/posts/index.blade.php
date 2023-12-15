@@ -22,18 +22,15 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('adminLogout') }}" class="btn btn-danger mb-3">Logout</a>
-                        
-                        <a href="{{ route('admin.posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH DATA</a>
 
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">GAMBAR</th>
-                                    <th scope="col">JUDUL</th>
+                                    <th scope="col">IMAGE</th>
+                                    <th scope="col">NAME</th>
                                     <th scope="col">DESKRIPSI</th>
-                                    <th scope="col">HARGA</th>
-                                    <th scope="col">KATEGORI</th>
+                                    <th scope="col">PRICE</th>
+                                    <th scope="col">CATEGORY</th>
                                     <th scope="col">ACTION</th>
                                 </tr>
                             </thead>
@@ -44,7 +41,7 @@
                                             <img src="{{ asset('/storage/products/' . $product->image) }}" class="rounded"
                                                 style="width: 150px">
                                         </td>
-                                        <td>{{ $product->image }}</td>
+                                        <td>{{ $product->nama }}</td>
                                         <td>{!! $product->deskripsi !!}</td>
                                         <td>{{ $product->harga }}</td>
                                         <td>{{ $product->category->nama_kategori }}</td>

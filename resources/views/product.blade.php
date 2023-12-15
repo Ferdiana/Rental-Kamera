@@ -9,10 +9,12 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
       <!-- Bootstrap CSS -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
       <style>
         .card-img-top {
-          height: 300px;
+          height: 100%;
           object-fit: cover;
         }
         .list-group-item {
@@ -23,11 +25,22 @@
         color: #0008ff !important; /* Mengubah warna teks saat aktif menjadi merah */
         }
         
+        .card-body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
         </style>
 
       <title>List Product</title>
   </head>
   <body>
+    @if(session('success'))
+    <div class="alert alert-success" id="success-alert">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 mb-5">
       <div class="container-fluid">
           <a class="navbar-brand" href="#">Rental Kamera</a>
@@ -81,7 +94,7 @@
             </div>
 
             <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 1030; width: 20%;">
-                <div class="card">
+                <div class="card" style= "border:none !important;" >
                     <div class="button-add">
                         <a href="/cart" class="btn btn-light">Cart</a>
                     </div>
@@ -95,16 +108,17 @@
                 <div class="row" id="product-container">
                     @foreach ($products as $product)
                         <div class="col-md-6 product" data-category="{{ $product->kategori_id }}">
-                            <div class="card mb-4">
+                            <div class="card mb-4 h-100">
                                 <img src="{{ Storage::url('public/products/'.$product->image) }}" class="card-img-top" alt="{{ $product->nama }}">
-                                <div class="card-body">
+                                <div class="card-body d-flex flex-column">
                                     <h5 class="card-title">{{ $product->nama }}</h5>
                                     <p class="card-text">{!! $product->deskripsi !!}</p>
-
-                                    <!-- Add to Cart Button -->
-                                    <form action="{{ route('cart.add', $product->id) }}" method="post">
+                                    
+            
+                                    <form action="{{ route('cart.add', $product->id) }}" method="post" class="mt-auto">
                                         @csrf
                                         <div class="mb-3">
+                                            <p class="card-text">Price/day: {!! $product->harga !!}</p>
                                             <label for="quantity" class="form-label">Quantity:</label>
                                             <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1">
                                         </div>
@@ -114,12 +128,12 @@
                             </div>
                         </div>
                     @endforeach
-                  
-                    <div class="col-md-12" id="no-products-message" style="display: none;">
-                      <p>No products available in this category.</p>
-                    </div>
-                  
                 </div>
+                <div id="no-products-message" style="display: none; padding: 1rem;">
+                    No products available for this category.
+                </div>
+            </div>
+            
             </div>
         </div>
       </div>
@@ -155,6 +169,13 @@
                 noProductsMessage.style.display = 'block';
             }
         }
+        
+        setTimeout(function () {
+        let successAlert = document.getElementById('success-alert');
+        if (successAlert) {
+            successAlert.style.display = 'none';
+        }
+    }, 3000);
     </script>
   </body>
 </html>

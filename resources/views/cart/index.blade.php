@@ -19,6 +19,11 @@
     <title> Cart </title>
   </head>
   <body>
+    @if(session('success'))
+    <div class="alert alert-success" id="success-alert">
+        {{ session('success') }}
+    </div>
+    @endif
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 mb-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Rental Kamera</a>
@@ -75,6 +80,9 @@
                                     </div>
                                     <hr>
                                 </div>
+                                @php
+                                    $totalPrice = 0; // Initialize the total price variable
+                                @endphp
                                 @foreach($cartItems as $cartItem)
                                         <div class="row">
                                             <div class="col">
@@ -111,9 +119,14 @@
                                             </div>
                                     
                                         </div>
+                                        @php
+                                            // Calculate and update the total price for each item
+                                            $totalPrice += $cartItem->product->harga * $cartItem->quantity;
+                                        @endphp
                                 @endforeach
                                     
                                 <div class="div" style="padding-bottom: 1rem">
+                                    <p>Total : {{ $totalPrice }}</p>
                                     <a href="{{ route('transactions.create') }}" class="btn btn-success">Proceed to Transaction</a>
                                 </div>
                             @endif
@@ -123,13 +136,5 @@
             </div>
         </div>
       </div>
-
-      
-      
-      
-
-    
-    
-
 </body>
 </html>

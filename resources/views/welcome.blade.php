@@ -23,22 +23,23 @@
                 <li>
                     <a href="#" class="nav-link text-white active" onclick="loadContent('{{ route('admin.posts.transaction.show-all') }}', this)">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                        Dashboard
+                        Transaction
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link text-white" onclick="loadContent('{{ route('admin.posts.index') }}', this)">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                        Home
+                        Product
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link text-white" onclick="loadContent('{{ route('admin.posts.create') }}', this)">
                         <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                        Orders
+                        Add Product
                     </a>
                 </li>
-            </ul>      
+                <a href="{{ route('adminLogout') }}" class="btn btn-danger mb-3">Logout</a>      
+            </ul>
         </div>
         
         <div class="flex-grow-1 d-flex flex-column p-3" id="dynamicContent">

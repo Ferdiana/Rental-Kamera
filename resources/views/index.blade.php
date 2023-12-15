@@ -66,8 +66,8 @@
         </div>
 
         <div class="col-md-4 d-flex flex-column justify-content-center">
-          <div class="h1 mb-4">Kamera</div>
-          <div class="p mb-4">kamera yang dapat anda sewa untuk mengabadikan momen-momen berharga anda. Kamera membawa keindahan fotografi ke ujung jari anda dengan teknologi canggih dan performa luar biasa.</div>
+          <div class="h1 mb-4">Camera</div>
+          <div class="p mb-4">Cameras that you can rent to capture your precious moments. The camera brings the beauty of photography to your fingertips with advanced technology and incredible performance.</div>
           <div class="div">
             <button class="btn-primary p-2" onclick="redirectToProduct()">Book Now</button>
           </div>
